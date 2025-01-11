@@ -1,0 +1,57 @@
+.exchange {
+    .container {
+      display: flex;
+      justify-content: center;  /* Центрирование карточек по горизонтали */
+      align-items: center;      /* Центрирование карточек по вертикали */
+      flex-wrap: wrap;          /* Позволяет карточкам переноситься на следующую строку */
+      gap: 20px;                /* Расстояние между карточками */
+      width: 100%;              /* Для корректного отображения на весь экран */
+      padding: 20px;            /* Отступы от краев контейнера */
+    }
+  
+    .wrapper {
+      width: 100%; /* Расширяет обертку на всю ширину контейнера */
+      max-width: 1200px; /* Устанавливаем максимальную ширину для предотвращения слишком широкого контента */
+    }
+  
+    .cards {
+      display: flex;
+      justify-content: center; /* Центрирование карточек по горизонтали */
+      flex-wrap: wrap;         /* Позволяет карточкам переноситься на следующую строку */
+      gap: 20px;               /* Расстояние между карточками */
+      width: 100%;             /* Занимает всю доступную ширину */
+    }
+  
+    .card1, .card2, .card3, .card4 {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease; /* Плавная анимация для эффектов */
+      
+      &:hover {
+        transform: translateY(-5px); /* Эффект поднятия карточки при наведении */
+      }
+    }
+  
+    .card1 img, .card2 img, .card3 img, .card4 img {
+      width: 50px; /* Ограничиваем размер изображения */
+      height: 50px;
+      margin-bottom: 10px;
+      object-fit: contain; /* Сохраняет пропорции изображений */
+    }
+  
+    h2 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #333; /* Цвет для заголовка */
+    }
+  
+    p {
+      font-size: 16px;
+      color: #333;
+    }
+  }
+  

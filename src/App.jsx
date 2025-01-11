@@ -1,20 +1,26 @@
 import React from 'react'
-import Header from './components/Header/Header'
 import './App.scss'
-import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import AboutPage from './pages/AboutPage'
-import Contacts from './pages/Contacts'
+import Header from './components/Header/Header'
+import ExchangePage from './pages/ExchangePage'
+import AdminPage from './pages/AdminPage'
+import Login from './pages/Login';
+import SignUP from './pages/SignUP';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 
 const App = () => {
   return (
     <>
-    <Header />
+    <Header/>
+    
 
     <Routes>
       <Route path='/' element={<Home/>}/>
-      <Route path='/about' element={<AboutPage/>}/>
-      <Route path='/contacts' element={<Contacts/>}/>
+      <Route path='/Exchange' element={<ExchangePage/>}/>
+      <Route path='/admin' element={<AdminPage/>}/>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUP />} />
     </Routes>
     </>
   )
