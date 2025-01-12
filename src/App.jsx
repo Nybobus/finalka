@@ -7,6 +7,9 @@ import AdminPage from './pages/AdminPage'
 import Login from './pages/Login';
 import SignUP from './pages/SignUP';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import WorkPage from './pages/WorkPage'
+import HelpPage from './pages/HelpPage'
+import CapablePage from './pages/CapablePage'
 
 
 const App = () => {
@@ -21,6 +24,9 @@ const App = () => {
       <Route path='/admin' element={<AdminPage/>}/>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUP />} />
+      <Route path="/Works" element={<WorkPage />} />
+      <Route path="/Help" element={<HelpPage />} />
+      <Route path="/Capable" element={<CapablePage />} />
     </Routes>
     </>
   )

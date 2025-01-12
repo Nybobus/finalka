@@ -1,59 +1,44 @@
-// src/pages/SignUp.js
-import React, { useState } from 'react';
+const handleSignUp = async (e) => {
+  e.preventDefault();
 
-const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  // Проверка на совпадение паролей
+  if (password !== confirmPassword) {
+    setError('Passwords do not match!');
+    return;
+  }
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Passwords do not match!');
-      return;
+  // Проверка на правильность email
+  if (!email || !email.includes('@')) {
+    setError('Please enter a valid email address.');
+    return;
+  }
+
+  setLoading(true);
+  setError('');
+
+  try {
+    // Запрос на сервер для регистрации
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // Успешная регистрация
+      alert('Successfully registered!');
+    } else {
+      // Ошибка при регистрации
+      setError(data.message || 'An error occurred. Please try again.');
     }
-    // Здесь можно добавить логику для отправки данных на сервер
-    console.log('Signing up with:', { email, password });
-  };
-
-  return (
-    <div className="auth-container">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  );
+  } catch (error) {
+    // Обработка ошибок сети
+    setError('Failed to connect to the server. Please try again later.');
+  } finally {
+    setLoading(false);
+  }
 };
-
-export default SignUp;

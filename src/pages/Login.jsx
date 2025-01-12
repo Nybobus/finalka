@@ -4,11 +4,49 @@ import React, { useState } from 'react';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Здесь можно добавить логику для отправки данных на сервер
-    console.log('Logging in with:', { email, password });
+    setLoading(true);
+    setError(''); // сбрасываем ошибку перед новым запросом
+
+    // Проверка на правильность email
+    if (!email || !email.includes('@')) {
+      setError('Please enter a valid email address.');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Отправляем запрос на сервер для аутентификации
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Успешный вход, например, сохранить токен в localStorage
+        localStorage.setItem('token', data.token); // Пример сохранения токена
+        alert('Logged in successfully!');
+        // Можно перенаправить пользователя на другую страницу, например:
+        // history.push('/dashboard');
+      } else {
+        // Ошибка при входе
+        setError(data.message || 'Invalid email or password.');
+      }
+    } catch (error) {
+      // Ошибка при подключении к серверу
+      setError('Failed to connect to the server. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -35,7 +73,10 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        {error && <div className="error-message">{error}</div>}
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logging In...' : 'Login'}
+        </button>
       </form>
     </div>
   );

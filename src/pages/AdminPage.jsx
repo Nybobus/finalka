@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 
 const AdminPage = () => {
-  // Начальные данные валют
+  // Состояние для авторизации
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginData, setLoginData] = useState({ username: '', password: '' });
+
+  // Список администраторов
+  const [admins, setAdmins] = useState([
+    { username: 'admin', password: 'admin' },
+    { username: 'superadmin', password: 'superadmin' },
+  ]);
+
+  // Состояние для валют
   const [currencies, setCurrencies] = useState([
     { id: 1, name: 'Bitcoin', rate: '1,230,449,234.92UZS' },
     { id: 2, name: 'Toncoin', rate: '70,021.98UZS' },
     { id: 3, name: 'Litecoin', rate: '1,356,413.16UZS' },
-    { id: 4, name: 'Tether', rate: '13,009.36UZS' }
+    { id: 4, name: 'Tether', rate: '13,009.36UZS' },
   ]);
 
   // Состояние для ввода новой валюты
@@ -16,24 +26,60 @@ const AdminPage = () => {
   const handleAddCurrency = () => {
     setCurrencies([
       ...currencies,
-      { id: Date.now(), name: newCurrency.name, rate: newCurrency.rate }
+      { id: Date.now(), name: newCurrency.name, rate: newCurrency.rate },
     ]);
     setNewCurrency({ name: '', rate: '' });
   };
 
   // Обработчик удаления валюты
   const handleDeleteCurrency = (id) => {
-    setCurrencies(currencies.filter(currency => currency.id !== id));
+    setCurrencies(currencies.filter((currency) => currency.id !== id));
   };
 
   // Обработчик изменения данных валюты
   const handleEditCurrency = (id, newRate) => {
-    setCurrencies(currencies.map(currency => 
-      currency.id === id ? { ...currency, rate: newRate } : currency
-    ));
+    setCurrencies(
+      currencies.map((currency) =>
+        currency.id === id ? { ...currency, rate: newRate } : currency
+      )
+    );
   };
 
-  return (
+  // Логика авторизации
+  const handleLogin = () => {
+    const validAdmin = admins.find(
+      (admin) => admin.username === loginData.username && admin.password === loginData.password
+    );
+
+    if (validAdmin) {
+      setIsAuthenticated(true);
+    } else {
+      alert('Неверный логин или пароль');
+    }
+  };
+
+  // Форма авторизации
+  const renderLoginForm = () => (
+    <div className="login-form">
+      <h2>Авторизация</h2>
+      <input
+        type="text"
+        placeholder="Логин"
+        value={loginData.username}
+        onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
+      />
+      <input
+        type="password"
+        placeholder="Пароль"
+        value={loginData.password}
+        onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+      />
+      <button onClick={handleLogin}>Войти</button>
+    </div>
+  );
+
+  // Главная админская страница
+  const renderAdminPage = () => (
     <div className="admin">
       <h1>Админка: Управление курсами валют</h1>
 
@@ -58,14 +104,15 @@ const AdminPage = () => {
       <div className="currency-list">
         <h2>Список валют</h2>
         <ul>
-          {currencies.map(currency => (
+          {currencies.map((currency) => (
             <li key={currency.id}>
               <span>{currency.name}: </span>
               <span>
-                <input 
-                  type="text" 
-                  value={currency.rate} 
-                  onChange={(e) => handleEditCurrency(currency.id, e.target.value)} 
+                <input
+                  className="price"
+                  type="text"
+                  value={currency.rate}
+                  onChange={(e) => handleEditCurrency(currency.id, e.target.value)}
                 />
               </span>
               <button onClick={() => handleDeleteCurrency(currency.id)}>Удалить</button>
@@ -75,6 +122,8 @@ const AdminPage = () => {
       </div>
     </div>
   );
-}
+
+  return isAuthenticated ? renderAdminPage() : renderLoginForm();
+};
 
 export default AdminPage;
