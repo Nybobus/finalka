@@ -1,111 +1,80 @@
+/* Сброс стилей */
 * {
   padding: 0;
   margin: 0;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+/* Основной контейнер */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 20px;
 }
 
-/* Основные стили для админки */
-.admin {
-  font-family: Arial, sans-serif;
-  max-width: 600px;
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+/* Основные стили для страниц */
+.admin,
+.auth-container,
+.help-container,
+.works,
+.capable-container,
+.exchange-container,
+.signup__wrapper,
+.contact-form,
+.exchange-card {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
+  box-sizing: border-box;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовки */
+h1, h2 {
+  color: #333;
 }
 
 h1 {
+  font-size: 28px;
   text-align: center;
-  color: #333;
-}
-
-.new-currency-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.new-currency-form input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.new-currency-form button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.new-currency-form button:hover {
-  background-color: #0056b3;
-}
-
-.currency-list ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.currency-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-.currency-list li span {
-  flex: 1;
-}
-
-.currency-list input {
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100px;
-}
-
-.currency-list button {
-  padding: 5px 10px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.currency-list button:hover {
-  background-color: #c82333;
-}
-
-/* Основные стили для страницы регистрации */
-.auth-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
 }
 
 h2 {
+  font-size: 24px;
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
 }
 
+/* Кнопки */
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Формы */
 form {
   display: flex;
   flex-direction: column;
@@ -119,7 +88,8 @@ label {
   color: #555;
 }
 
-input {
+input,
+textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -127,177 +97,235 @@ input {
   box-sizing: border-box;
 }
 
-button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Основные стили для страницы помощи */
-.help-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-p {
-  color: #555;
-  line-height: 1.6;
-}
-
-.help-section {
-  margin-bottom: 20px;
-}
-
-.help-section h2 {
-  margin-bottom: 10px;
-  color: #007bff;
-}
-
-.help-section ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
-
-.help-section ul li {
-  margin-bottom: 10px;
-}
-
-.help-footer {
-  text-align: center;
-  margin-top: 20px;
-  color: #777;
-}
-
-/* Стили для страницы Works */
-
-.works {
-  padding: 50px 0;
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.wrapper {
-  text-align: center;
-}
-
-.wrapper h2 {
-  font-size: 36px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.wrapper p {
-  font-size: 18px;
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 40px;
-}
-
-.cards {
+/* Стили для карточек */
+.cards,
+.work-item,
+.exchange-content {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
-.card1 {
+.work-item,
+.exchange-card {
+  flex: 1 1 30%;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  flex: 1;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.card1 img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 20px;
+.work-item:hover,
+.exchange-card:hover {
+  transform: translateY(-10px);
 }
 
-.card1 h2 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 15px;
+/* Адаптивность */
+
+/* Медиазапросы для планшетов */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 15px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .work-item,
+  .exchange-card {
+    flex: 1 1 45%;
+  }
 }
 
-.card1 p {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.5;
-}
+/* Медиазапросы для мобильных устройств */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+  }
 
-.capable {
-    background-color: #f4f4f4;
-    padding: 50px 0;
+  h1 {
+    font-size: 20px;
   }
-  
-  .capable-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+
+  .work-item,
+  .exchange-card {
+    flex: 1 1 100%;
   }
-  
-  .capable-wrapper {
-    text-align: center;
-  }
-  
-  .capable-wrapper h2 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .capable-wrapper p {
-    font-size: 18px;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 30px;
-  }
-  
-  .capable-wrapper img {
+
+  .card1 img {
     max-width: 100%;
-    height: auto;
-    margin: 20px 0;
   }
-  
+
+  .work-item h3,
+  .work-item p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Общие стили для страницы */
+.help-footer p,
+.contact-form button,
+.capable-wrapper button {
+  text-align: center;
+  cursor: pointer;
+}
+
+.contact-form input,
+.contact-form textarea {
+  font-size: 16px;
+}
+
+/* Стиль для компонента Works */
+.works-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Общие стили для компонента Hero */
+.hero {
+  background-color: #007bff;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+}
+
+.hero button {
+  background-color: #ff5722;
+  padding: 10px 20px;
+  font-size: 18px;
+}
+
+/* Футер */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+.footer p {
+  font-size: 16px;
+}
+
+/* Обновления для мобильных */
+@media (max-width: 768px) {
+  .hero {
+    padding: 50px 20px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .footer p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 40px 15px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .footer p {
+    font-size: 12px;
+  }
+}
+
+/* Адаптивность для страниц регистрации */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .auth-container {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  input,
+  button {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .auth-container {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  input,
+  button {
+    font-size: 0.8rem;
+  }
+}
+
+/* Стиль для компонента Capable */
+.capable-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.capable-wrapper h2 {
+  font-size: 32px;
+}
+
+.capable-wrapper img {
+  max-width: 100%;
+}
+
+.capable-wrapper button {
+  padding: 12px 30px;
+}
+
+@media (max-width: 768px) {
+  .capable-wrapper {
+    flex-direction: column;
+  }
+
   .capable-wrapper button {
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 14px;
   }
-  
-  .capable-wrapper button:hover {
-    background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+  .capable-wrapper h2 {
+    font-size: 28px;
   }
-  
+}

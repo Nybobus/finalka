@@ -1,44 +1,104 @@
-const handleSignUp = async (e) => {
-  e.preventDefault();
+import React, { useState } from 'react';
 
-  // Проверка на совпадение паролей
-  if (password !== confirmPassword) {
-    setError('Passwords do not match!');
-    return;
-  }
+const SignUP = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // Проверка на правильность email
-  if (!email || !email.includes('@')) {
-    setError('Please enter a valid email address.');
-    return;
-  }
+  const handleSignUp = async (e) => {
+    e.preventDefault();
 
-  setLoading(true);
-  setError('');
-
-  try {
-    // Запрос на сервер для регистрации
-    const response = await fetch('/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      // Успешная регистрация
-      alert('Successfully registered!');
-    } else {
-      // Ошибка при регистрации
-      setError(data.message || 'An error occurred. Please try again.');
+    // Проверка на совпадение паролей
+    if (password !== confirmPassword) {
+      setError('Пароли не совпадают!');
+      return;
     }
-  } catch (error) {
-    // Обработка ошибок сети
-    setError('Failed to connect to the server. Please try again later.');
-  } finally {
-    setLoading(false);
-  }
+
+    // Проверка на правильность email
+    if (!email || !email.includes('@')) {
+      setError('Пожалуйста, введите корректный email.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      // Запрос на сервер для регистрации
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Успешная регистрация
+        alert('Успешная регистрация!');
+      } else {
+        // Ошибка при регистрации
+        setError(data.message || 'Произошла ошибка. Пожалуйста, попробуйте снова.');
+      }
+    } catch (error) {
+      // Обработка ошибок сети
+      setError('Не удалось подключиться к серверу. Пожалуйста, попробуйте позже.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <section className="signup">
+        <div className="container__signup">
+          <div className="signup__wrapper">
+            <h2>Регистрация</h2>
+            <form onSubmit={handleSignUp}>
+              <div className="form__group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Введите ваш email"
+                />
+              </div>
+              <div className="form__group">
+                <label htmlFor="password">Пароль</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Введите ваш пароль"
+                />
+              </div>
+              <div className="form__group">
+                <label htmlFor="confirm-password">Подтверждение пароля</label>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Подтвердите пароль"
+                />
+              </div>
+              {error && <p className="error">{error}</p>}
+              <button type="submit" disabled={loading}>
+                {loading ? 'Загрузка...' : 'Зарегистрироваться'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
+
+export default SignUP;
