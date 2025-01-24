@@ -600,3 +600,16 @@ textarea {
     font-size: 14px;
   }
 }
+
+@media (max-width: 768px) {
+  .header__wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+@media (max-width: 480px) {
+  .quo {
+    font-size: 18px;
+  }
+}
