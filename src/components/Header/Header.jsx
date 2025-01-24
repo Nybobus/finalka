@@ -11,9 +11,9 @@ const Header = () => {
           <h3 className="quo">Quo.</h3>
           <Link to="/">Home</Link>
           <Link to="/Exchange">Money Transfer</Link>
-          <Link to="/admin">Admin</Link>
           <Link to="/Capable">Multiple Cards</Link>
           <Link to="/help">Help</Link>
+          <Link to="/Geo">Countries</Link>
           <button className="hren">
             <Link to="/login">Login</Link>
           </button>

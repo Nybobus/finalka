@@ -15,7 +15,9 @@ const Hero = () => {
                     <p>Quo is the most easier way for transaction with your friends and family, now matter where are you. <br/>
                     An exceptional way for make your life one step easier <br/>   </p>
 
-                    <button>See how we works</button>
+                    <div className='btn123'>
+                    <a className='sell' href="https://youtu.be/u6s5YFAaaro?si=jfTmID5zO70MdFzT" class="button">How to sell?</a>
+                    </div>
 
                     <section className="hero__box">
                         <img src="./public/quoimg.png" alt="" />

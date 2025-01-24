@@ -19,10 +19,9 @@ const Capable = () => {
               family,
             </p>
 
-            <img src="/capable1" alt="" />
-            <img src="/capable2" alt="" />
+            <img src="/capable1.png" alt="" />
+            <img src="/capable2.png" alt="" />
 
-            <button>Learn How</button>
           </div>
         </div>
       </section>
