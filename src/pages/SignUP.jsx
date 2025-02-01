@@ -26,27 +26,36 @@ const SignUP = () => {
     setError('');
 
     try {
-      // Запрос на сервер для регистрации
-      const response = await fetch('/api/signup', {
+      // Проверка на наличие пользователя с таким email в db.json
+      const response = await fetch('http://localhost:5000/users');
+      const users = await response.json();
+
+      if (users.find((user) => user.email === email)) {
+        setError('Пользователь с таким email уже существует.');
+        return;
+      }
+
+      // Регистрация нового пользователя
+      const newUser = { email, password };
+      
+      const registerResponse = await fetch('http://localhost:5000/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(newUser),
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // Успешная регистрация
+      if (registerResponse.ok) {
         alert('Успешная регистрация!');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
       } else {
-        // Ошибка при регистрации
-        setError(data.message || 'Произошла ошибка. Пожалуйста, попробуйте снова.');
+        setError('Произошла ошибка при регистрации. Пожалуйста, попробуйте снова.');
       }
     } catch (error) {
-      // Обработка ошибок сети
-      setError('Не удалось подключиться к серверу. Пожалуйста, попробуйте позже.');
+      setError('Произошла ошибка при обработке данных. Пожалуйста, попробуйте снова.');
     } finally {
       setLoading(false);
     }

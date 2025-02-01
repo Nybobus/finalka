@@ -1,11 +1,13 @@
 // src/pages/Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Для перенаправления на страницу профиля
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,29 +22,18 @@ const Login = () => {
     }
 
     try {
-      // Отправляем запрос на сервер для аутентификации
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
+      // Симуляция успешного входа
+      const response = { ok: true, data: { token: 'fake-token' } }; // замените на реальный запрос
 
       if (response.ok) {
-        // Успешный вход, например, сохранить токен в localStorage
-        localStorage.setItem('token', data.token); // Пример сохранения токена
+        // Сохраняем информацию о пользователе
+        localStorage.setItem('token', response.data.token); 
         alert('Logged in successfully!');
-        // Можно перенаправить пользователя на другую страницу, например:
-        // history.push('/dashboard');
+        navigate('/profile'); // Перенаправляем на страницу профиля
       } else {
-        // Ошибка при входе
-        setError(data.message || 'Invalid email or password.');
+        setError('Invalid email or password.');
       }
     } catch (error) {
-      // Ошибка при подключении к серверу
       setError('Failed to connect to the server. Please try again later.');
     } finally {
       setLoading(false);

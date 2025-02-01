@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AdminPage = () => {
-  // Состояние для авторизации
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginData, setLoginData] = useState({ username: '', password: '' });
 
-  // Список администраторов
   const [admins, setAdmins] = useState([
     { username: 'admin', password: 'admin' },
     { username: 'superadmin', password: 'superadmin' },
   ]);
 
-  // Состояние для валют
   const [currencies, setCurrencies] = useState([
     { id: 1, name: 'Bitcoin', rate: '1,230,449,234.92UZS' },
     { id: 2, name: 'Toncoin', rate: '70,021.98UZS' },
@@ -19,10 +16,8 @@ const AdminPage = () => {
     { id: 4, name: 'Tether', rate: '13,009.36UZS' },
   ]);
 
-  // Состояние для ввода новой валюты
   const [newCurrency, setNewCurrency] = useState({ name: '', rate: '' });
 
-  // Обработчик добавления новой валюты
   const handleAddCurrency = () => {
     setCurrencies([
       ...currencies,
@@ -31,21 +26,18 @@ const AdminPage = () => {
     setNewCurrency({ name: '', rate: '' });
   };
 
-  // Обработчик удаления валюты
   const handleDeleteCurrency = (id) => {
     setCurrencies(currencies.filter((currency) => currency.id !== id));
   };
 
-  // Обработчик изменения данных валюты
   const handleEditCurrency = (id, newRate) => {
-    setCurrencies(
-      currencies.map((currency) =>
+    setCurrencies((prevCurrencies) =>
+      prevCurrencies.map((currency) =>
         currency.id === id ? { ...currency, rate: newRate } : currency
       )
     );
   };
 
-  // Логика авторизации
   const handleLogin = () => {
     const validAdmin = admins.find(
       (admin) => admin.username === loginData.username && admin.password === loginData.password
@@ -58,7 +50,6 @@ const AdminPage = () => {
     }
   };
 
-  // Форма авторизации
   const renderLoginForm = () => (
     <div className="login-form">
       <h2>Авторизация</h2>
@@ -78,12 +69,10 @@ const AdminPage = () => {
     </div>
   );
 
-  // Главная админская страница
   const renderAdminPage = () => (
     <div className="admin">
       <h1>Админка: Управление курсами валют</h1>
 
-      {/* Форма для добавления новой валюты */}
       <div className="new-currency-form">
         <input
           type="text"
@@ -100,7 +89,6 @@ const AdminPage = () => {
         <button onClick={handleAddCurrency}>Добавить валюту</button>
       </div>
 
-      {/* Список валют с возможностью редактирования и удаления */}
       <div className="currency-list">
         <h2>Список валют</h2>
         <ul>

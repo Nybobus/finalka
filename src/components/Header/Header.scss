@@ -1,54 +1,101 @@
-/* Стили для Header */
-
+// src/components/Header.scss
 header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #eaeaea;
-  padding: 20px 0;
-}
+  .header__wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 10px 20px;
+    background-color: white;
+  }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+  .quo {
+    font-size: 24px;
+    font-weight: bold;
+  }
 
-.header__wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  .menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
 
-.quo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-}
+    a {
+      text-decoration: none;
+      color: black;
+      font-size: 18px;
+    }
 
-.header__wrap a {
-  color: #333;
-  text-decoration: none;
-  margin: 0 15px;
-  font-size: 20px;
-}
+    .hren {
+      background-color: transparent;
+      border: none;
+      a {
+        color: black;
+        text-decoration: none;
+        font-size: 16px;
+      }
+    }
+  }
 
-.header__wrap a:hover {
-  color: #007bff;
-}
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    gap: 5px;
 
-.hren {
-  background-color: #007bff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
+    .bar {
+      width: 30px;
+      height: 4px;
+      background-color: black;
+      transition: all 0.3s ease;
+    }
 
-.hren a {
-  color: #ffffff;
-  text-decoration: none;
-}
+    .bar.open {
+      transform: rotate(45deg);
+      position: relative;
+    }
 
-.hren:hover {
-  background-color: #0056b3;
+    .bar.open:nth-child(2) {
+      opacity: 0;
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .menu.active {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: white;
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+    align-items: center;
+
+    a {
+      font-size: 18px;
+    }
+
+    .hren {
+      padding: 10px;
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .menu {
+      display: none;
+    }
+
+    .menu.active {
+      display: flex;
+    }
+  }
 }

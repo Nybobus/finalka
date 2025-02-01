@@ -12,6 +12,8 @@ import HelpPage from './pages/HelpPage'
 import CapablePage from './pages/CapablePage'
 import GeoPage from './pages/GeoPage'
 import PeoplePage from './pages/PeoplePage'
+import Profile from './pages/ProfilePage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx'
 
 
 const App = () => {
@@ -31,6 +33,8 @@ const App = () => {
       <Route path="/Capable" element={<CapablePage />} />
       <Route path="/Geo" element={<GeoPage />} />
       <Route path="/People" element={<PeoplePage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      
     </Routes>
     </>
   )
